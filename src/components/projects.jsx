@@ -81,7 +81,7 @@ function Projects() {
       className="bg-[#0a0a0a] relative overflow-hidden h-screen"
     >
       <p className="absolute top-10 left-16 z-10 text-[#a0a0a0] uppercase tracking-widest text-[10px] font-medium">
-        Selected Works
+        Projects
       </p>
 
       <div
