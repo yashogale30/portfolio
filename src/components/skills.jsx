@@ -18,7 +18,6 @@ function Skills() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Apple-style entrance: From the center, with a subtle blur-in
       gsap.fromTo(
         pillsRef.current,
         { 
@@ -33,7 +32,7 @@ function Skills() {
           scale: 1,
           filter: "blur(0px)",
           duration: 0.8,
-          ease: "expo.out", // Smoother than back.out for a "Pro" feel
+          ease: "expo.out", 
           stagger: {
             amount: 1,
             from: "center",

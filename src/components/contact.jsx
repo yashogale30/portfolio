@@ -17,10 +17,8 @@ function Contact() {
   return (
     <section className="h-screen flex flex-col items-center justify-center bg-black px-6 relative overflow-hidden">
       
-      {/* Subtle Gradient Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#6ee7b7]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* Headline Section */}
       <div className="text-center z-10 mb-12">
         <p className="text-[#86868b] uppercase tracking-[0.2em] text-[10px] font-bold mb-4">
           Connect
@@ -33,7 +31,6 @@ function Contact() {
         </h2>
       </div>
 
-      {/* Links Grid - Using a more structured, airy layout */}
       <div className="flex flex-wrap justify-center gap-3 max-w-2xl z-10">
         {links.map(({ icon, label, href }) => (
           <a
@@ -51,7 +48,6 @@ function Contact() {
         ))}
       </div>
 
-      {/* Footer - Minimalist & Pushed down */}
       <footer className="absolute bottom-12 w-full text-center z-10">
         <p className="text-[#424245] text-[10px] font-medium tracking-widest uppercase">
           © 2026 — Yash Ogale

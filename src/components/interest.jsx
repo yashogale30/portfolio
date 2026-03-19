@@ -37,8 +37,8 @@ function Interest() {
         className="text-center font-bold uppercase"
         style={{
           fontSize: "clamp(2.5rem, 6vw, 7rem)",
-          lineHeight: "1.05", // Slightly tighter for Apple look
-          letterSpacing: "-0.05em", // Crucial: Apple's signature tight tracking
+          lineHeight: "1.05", 
+          letterSpacing: "-0.05em",
           fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "SF Pro Display", sans-serif'
         }}
       >

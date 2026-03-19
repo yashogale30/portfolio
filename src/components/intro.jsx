@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import pfp from "../assets/pfp.png";
 
 function Intro() {
   const sectionRef = useRef(null);
@@ -10,9 +11,7 @@ function Intro() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.5 } });
 
-      // 1. Initial State: Image starts slightly zoomed in
       gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
-      // 2. Initial State: Text starts lower and invisible
       gsap.set(".animate-text", { y: 50, opacity: 0 });
 
       tl.to(imgRef.current, { 
@@ -23,12 +22,12 @@ function Intro() {
       .to(".animate-text", { 
         y: 0, 
         opacity: 1, 
-        stagger: 0.2 // This creates the "one-by-one" reveal effect
-      }, "-=1.5"); // Start text animation 1.5s before image finish
+        stagger: 0.2 
+      }, "-=1.5"); 
       
     }, sectionRef);
 
-    return () => ctx.revert(); // Cleanup
+    return () => ctx.revert(); 
   }, []);
 
   return (
@@ -36,7 +35,7 @@ function Intro() {
       
       <img 
         ref={imgRef}
-        src="src/assets/Gemini_Generated_Image_87saf987saf987sa.png" 
+        src= {pfp }
         alt="Yash" 
         className="w-full h-full object-cover"
       />
@@ -53,7 +52,6 @@ function Intro() {
         </p>
       </div>
       
-      {/* Ensure gradient is on top of image but behind text */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent pointer-events-none" />
     </section>
   );

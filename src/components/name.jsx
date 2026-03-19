@@ -10,20 +10,18 @@ function Name() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Apple-style initial state: Tight tracking and refined white
       gsap.set(textRef.current, { scale: 1, opacity: 1 });
 
-      // 2. The High-End Zoom
       gsap.to(textRef.current, {
-        scale: 12, // Increased scale for that "passing through the letters" feel
+        scale: 12, 
         opacity: 0,
-        filter: "blur(15px)", // Adds "Lens Depth" as it gets closer
-        ease: "expo.in", // This creates the "rush" effect Apple uses
+        filter: "blur(15px)", 
+        ease: "expo.in", 
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=125%", // Gives the user more "room" to scroll the zoom
-          scrub: 0.8,    // Smoother lag-time for the mouse wheel
+          end: "+=125%", 
+          scrub: 0.8,  
           pin: true,
           anticipatePin: 1,
         }
