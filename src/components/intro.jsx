@@ -45,7 +45,7 @@ function Intro() {
           Hello, 
         </p>
         <h2 className="animate-text text-7xl font-bold text-[#f0f0f0] mb-4 tracking-tight">
-          I build crazy stuffs .
+          I build crazy stuff .
         </h2>
         <p className="animate-text text-[#a0a0a0] text-xl leading-relaxed max-w-lg">
           - Yash Ogale <br/> (Pre Final Year UG @Veermata Jijabai Technological Institue (VJTI)) .
