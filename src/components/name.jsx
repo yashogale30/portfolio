@@ -38,14 +38,17 @@ function Name() {
     >
       <h1 
         ref={textRef} 
-        className="name-text text-[10vw] font-bold tracking-[-0.05em] text-[#f5f5f7] antialiased select-none"
+        className="name-text text-[12vw] font-bold tracking-[-0.05em] text-[#f5f5f7] antialiased select-none"
         style={{ 
             fontFamily: '-apple-system, BlinkMacSystemFont, "Inter", "SF Pro Display", sans-serif',
             willChange: "transform, opacity, filter" 
         }}
       >
         Yash Ogale
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=usttXhf54v5N5TRa&t=1"
+          className="text-[#0071e3]"> .</a>
       </h1>
+      
     </section>
   )
 }

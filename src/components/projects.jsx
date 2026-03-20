@@ -27,8 +27,17 @@ function Projects() {
   const sectionRef = useRef(null)
   const containerRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return 
+
     const container = containerRef.current
     const section = sectionRef.current
 
@@ -47,7 +56,6 @@ function Projects() {
             pin: true,
             invalidateOnRefresh: true,
             anticipatePin: 1,
-            // update active dot based on scroll progress
             onUpdate: (self) => {
               const index = Math.round(self.progress * (projects.length - 1))
               setActiveIndex(index)
@@ -77,8 +85,50 @@ function Projects() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [])
+  }, [isMobile])
 
+  // MOBILE LAYOUT
+  if (isMobile) {
+    return (
+      <section className="bg-[#0a0a0a] py-20 px-6">
+        <p className="text-[#a0a0a0] uppercase tracking-widest text-xs font-medium mb-10 text-center">
+          Projects
+        </p>
+        <div className="flex flex-col gap-6">
+          {projects.map((project, i) => (
+            <a
+              key={i}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative rounded-3xl overflow-hidden block"
+              style={{ height: "60vw" }}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="text-xl font-bold text-white tracking-tight mb-1">
+                  {project.title}
+                </h3>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  {project.desc}
+                </p>
+              </div>
+              <div className="absolute top-4 right-4 text-white/10 text-2xl font-black italic">
+                {i + 1 < 10 ? `0${i + 1}` : i + 1}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  // DESKTOP LAYOUT
   return (
     <section
       ref={sectionRef}
@@ -89,7 +139,6 @@ function Projects() {
         Projects
       </p>
 
-      {/* Cards */}
       <div
         ref={containerRef}
         className="flex items-center h-full gap-12 pl-20 pr-40"
@@ -111,9 +160,6 @@ function Projects() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              {/* <span className="text-[#0071e3] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
-                {project.tag}
-              </span> */}
               <h3 className="text-3xl font-bold text-white tracking-tight mb-3">
                 {project.title}
               </h3>
@@ -128,7 +174,6 @@ function Projects() {
         ))}
       </div>
 
-      {/* Dot indicators */}
       <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2 z-10">
         {projects.map((_, i) => (
           <div
@@ -142,7 +187,6 @@ function Projects() {
           />
         ))}
       </div>
-
     </section>
   )
 }
