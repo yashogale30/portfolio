@@ -54,7 +54,7 @@ function Skills() {
       ref={sectionRef} 
       className="min-h-screen flex flex-col items-center justify-center bg-black px-8 py-32 overflow-hidden"
     >
-      <p className="text-[#86868b] uppercase tracking-[0.5em] text-[10px] mb-20 font-bold opacity-80">
+      <p className="text-[#86868b] uppercase tracking-[0.5em] text-[2.5vh] mb-20 font-bold opacity-80">
         Things I use
       </p>
 

@@ -20,7 +20,7 @@ function Contact() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#6ee7b7]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="text-center z-10 mb-12">
-        <p className="text-[#86868b] uppercase tracking-[0.2em] text-[10px] font-bold mb-4">
+        <p className="text-[#86868b] uppercase tracking-[0.2em] text-[2vh] font-bold mb-4">
           Connect
         </p>
         <h2 className="text-6xl md:text-8xl font-semibold text-white tracking-tight leading-[1.1]">

@@ -1,7 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import car from "../assets/car.png";
 import signlang from "../assets/signlang.png";
 import quadspace from "../assets/quadspace.png";
@@ -22,19 +21,20 @@ const projects = [
   { title: "Distraction Removal", desc: "Chrome Extension", tag: "Utility", image: chrome, link: "https://github.com/yashogale30/Distraction_Removal_Chrome_extention" },
   { title: "Simple RAG system", desc: "RAG pipeline", tag: "LLMs", image: rag, link: "https://github.com/yashogale30/COE_VJTI" },
   { title: "Ai Lawyer", desc: "Chatbot assistant for LAW", tag: "NLP", image: lawyer, link: "https://github.com/yashogale30/Legal_Aid_Advisor" },
-];
+]
 
 function Projects() {
-  const sectionRef = useRef(null);
-  const containerRef = useRef(null);
+  const sectionRef = useRef(null)
+  const containerRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    const container = containerRef.current;
-    const section = sectionRef.current;
+    const container = containerRef.current
+    const section = sectionRef.current
 
     let ctx = gsap.context(() => {
       const calculateScroll = () => {
-        const scrollAmount = container.scrollWidth - window.innerWidth;
+        const scrollAmount = container.scrollWidth - window.innerWidth
 
         gsap.to(container, {
           x: -scrollAmount,
@@ -47,43 +47,49 @@ function Projects() {
             pin: true,
             invalidateOnRefresh: true,
             anticipatePin: 1,
+            // update active dot based on scroll progress
+            onUpdate: (self) => {
+              const index = Math.round(self.progress * (projects.length - 1))
+              setActiveIndex(index)
+            }
           },
-        });
-      };
+        })
+      }
 
-      const images = container.querySelectorAll("img");
-      let loaded = 0;
+      const images = container.querySelectorAll("img")
+      let loaded = 0
 
       if (images.length === 0) {
-        calculateScroll();
+        calculateScroll()
       } else {
         images.forEach((img) => {
           if (img.complete) {
-            loaded++;
-            if (loaded === images.length) calculateScroll();
+            loaded++
+            if (loaded === images.length) calculateScroll()
           } else {
             img.addEventListener("load", () => {
-              loaded++;
-              if (loaded === images.length) calculateScroll();
-            });
+              loaded++
+              if (loaded === images.length) calculateScroll()
+            })
           }
-        });
+        })
       }
-    }, sectionRef);
+    }, sectionRef)
 
-    return () => ctx.revert(); 
-  }, []);
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="projects" 
+    <section
+      ref={sectionRef}
+      id="projects"
       className="bg-[#0a0a0a] relative overflow-hidden h-screen"
     >
-      <p className="absolute top-10 left-16 z-10 text-[#a0a0a0] uppercase tracking-widest text-[10px] font-medium">
+      <p className="absolute top-10 left-16 z-10 text-[#a0a0a0] uppercase tracking-widest text-[2.5vh] font-medium">
         Projects
       </p>
 
+      {/* Cards */}
       <div
         ref={containerRef}
         className="flex items-center h-full gap-12 pl-20 pr-40"
@@ -96,20 +102,18 @@ function Projects() {
             target="_blank"
             rel="noopener noreferrer"
             className="relative flex-shrink-0 rounded-3xl overflow-hidden cursor-pointer group block"
-            style={{ width: "420px", height: "560px" }}
+            style={{ width: "28vw", height: "65vh" }}
           >
             <img
               src={project.image}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-            
             <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <span className="text-[#0071e3] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
+              {/* <span className="text-[#0071e3] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
                 {project.tag}
-              </span>
+              </span> */}
               <h3 className="text-3xl font-bold text-white tracking-tight mb-3">
                 {project.title}
               </h3>
@@ -117,15 +121,30 @@ function Projects() {
                 {project.desc}
               </p>
             </div>
-
             <div className="absolute top-8 right-8 text-white/10 text-4xl font-black italic">
               {i + 1 < 10 ? `0${i + 1}` : i + 1}
             </div>
           </a>
         ))}
       </div>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2 z-10">
+        {projects.map((_, i) => (
+          <div
+            key={i}
+            className="transition-all duration-300 rounded-full"
+            style={{
+              width: i === activeIndex ? "20px" : "6px",
+              height: "6px",
+              backgroundColor: i === activeIndex ? "#0071e3" : "rgba(255,255,255,0.2)",
+            }}
+          />
+        ))}
+      </div>
+
     </section>
-  );
+  )
 }
 
-export default Projects;
+export default Projects
